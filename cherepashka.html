@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Turtle Animation</title>
+  <style>
+    .turtle-container {
+      position: relative;
+    }
+    .turtle-image {
+      width: 400px;
+      height: 400px;
+      position: absolute;
+      transition: transform 0.5s ease-in-out;
+      background-image: url('/images/cherepaha.png');
+      background-size: cover;
+    }
+  </style>
+</head>
+<body>
+  <div class="turtle-container" onmousemove="moveTurtle(event)">
+    <img class="turtle-image" id="turtle" alt="">
+  </div>
+
+  <script>
+    function moveTurtle(event) {
+      var turtle = document.getElementById("turtle");
+      var container = document.querySelector(".turtle-container");
+      var containerRect = container.getBoundingClientRect();
+      
+      var mouseX = event.clientX - containerRect.left; // Получаем координату X курсора относительно контейнера
+      var mouseY = event.clientY - containerRect.top; // Получаем координату Y курсора относительно контейнера
+      
+      var randomX = Math.random() * containerRect.width;
+      var randomY = Math.random() * containerRect.height;
+      
+      var directionX = mouseX > turtle.width / 2 ? -1 : 1; // Если курсор слева от черепашки, двигаться вправо, и наоборот
+      var directionY = mouseY > turtle.height / 2 ? -1 : 1; // Если курсор выше черепашки, двигаться вниз, и наоборот
+      
+      // Ограничиваем координаты, чтобы черепашка не выходила за пределы экрана
+      var newX = Math.max(0, Math.min(containerRect.width - turtle.width, randomX));
+      var newY = Math.max(0, Math.min(containerRect.height - turtle.height, randomY));
+      
+      turtle.style.transform = "translate(" + newX + "px, " + newY + "px) scaleX(" + directionX + ")";
+      
+    }
+  </script>
+</body>
+</html>

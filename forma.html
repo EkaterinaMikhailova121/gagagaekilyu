@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zoo Job Application Form</title>
+  <style>
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    h1 {
+        text-align: center;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    select {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    select {
+      margin-top: 5px;
+    }
+
+    .animals-list {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    .animals-list li {
+      margin-bottom: 5px;
+    }
+
+    .submit-btn {
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .submit-btn:hover {
+      background-color: #45a049;
+    }
+
+    .error-message {
+      color: red;
+      font-weight: bold;
+    }
+
+    fieldset {
+        margin: 20px;
+    }
+
+    h4{
+        margin-left: 20px;
+    }
+
+    label, select, textarea, li {
+        margin: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Форма заявки на работу в зоопарке</h1>
+    <h4>Пожалуйста, заполните форму. Обязательные поля выделены <font color="red">*</font></h4>
+    <form id="jobApplicationForm" onsubmit="return validateForm()">
+
+        <fieldset>
+            <legend>Контактная информация</legend>
+            <label for="name">Имя <font color="red">*</font><input type="text" id="name" name="name" required></label>
+            <label for="phone">Телефон<input type="tel" id="phone" name="phone"></label>
+            <label for="email">E-mail <font color="red">*</font><input type="email" id="email" name="email" required></label>
+        </fieldset>
+
+        <fieldset>
+            <legend>Персональная информация</legend>
+            <label for="age">Возраст <font color="red">*</font><input type="text" id="age" name="age" required></label>
+            <label for="gender">Пол <font color="red">*</font></label>
+        <select id="gender" name="gender" required>
+          <option value="">Выбрать</option>
+          <option value="male">Мужской</option>
+          <option value="female">Женский</option>
+        </select>
+        <label for="qualities">Перечислите личные качества:</label>
+        <textarea id="qualities" name="qualities"></textarea>
+        </fieldset>
+
+        <fieldset>
+            <legend>Выберите ваших любимых животных:</legend>
+        <ul class="animals-list">
+          <li><input type="checkbox" name="animals" value="zebra"> Зебра</li>
+          <li><input type="checkbox" name="animals" value="cat"> Кошка</li>
+          <li><input type="checkbox" name="animals" value="anaconda"> Анаконда</li>
+          <li><input type="checkbox" name="animals" value="human"> Человек</li>
+          <li><input type="checkbox" name="animals" value="elephant"> Слон</li>
+          <li><input type="checkbox" name="animals" value="antelope"> Антилопа</li>
+          <li><input type="checkbox" name="animals" value="pigeon"> Голубь</li>
+          <li><input type="checkbox" name="animals" value="crab"> Краб</li>
+        </ul>
+        </fieldset>
+
+      <button type="submit" class="submit-btn">Отправить информацию</button>
+    </form>
+    <p id="submitMessage"></p>
+  </div>
+  <div id="messageBox" class="message-box"></div>
+
+  <script>
+    function validateForm() {
+      var name = document.getElementById('name').value;
+      var email = document.getElementById('email').value;
+      var age = document.getElementById('age').value;
+      var gender = document.getElementById('gender').value;
+
+      if (name.trim() === '' || email.trim() === '' || age.trim() === '' || gender.trim() === '') {
+        document.getElementById('submitMessage').innerHTML = '<span class="error-message">Please fill out all required fields.</span>';
+        document.getElementById('submitMessage').innerHTML = '<span class="success-message">Form successfully submitted!</span>';
+        return false;
+      }
+      showMessage('Form successfully submitted!', 'success');
+      return true;
+    }
+
+    function showMessage(message, type) {
+      var messageBox = document.getElementById('messageBox');
+      messageBox.innerText = message;
+      messageBox.className = 'message-box ' + type + '-message';
+      messageBox.style.display = 'block';
+      setTimeout(function() {
+        messageBox.style.display = 'none';
+      }, 3000);
+    }
+  </script>
+</body>
+</html>

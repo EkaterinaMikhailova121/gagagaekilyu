@@ -1,0 +1,19 @@
+#studentsTable {
+    width: 70%; /* 100% ширина таблицы */
+    border-collapse: collapse; /* Сворачиваем границы ячеек */
+  }
+  
+  #studentsTable th, #studentsTable td {
+    padding: 7px; /* Отступы внутри ячеек */
+    text-align: center; /* Выравнивание текста по центру */
+  }
+  
+  #studentForm {
+    margin-top: 20px; /* Отступ сверху для формы добавления студента */
+  }
+
+  body {
+    margin: 20px;
+  }
+
+  

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="student.css"
+<title>Студенты</title>
+</head>
+<body>
+
+<h1>Список студентов</h1>
+
+<table id="studentsTable" border="2">
+  <thead>
+    <tr>
+      <th>Фамилия</th>
+      <th>Имя</th>
+      <th>Отчество</th>
+      <th>Курс</th>
+      <th>Группа</th>
+    </tr>
+  </thead>
+  <tbody id="studentsTableBody">
+    <!-- Здесь будут добавляться студенты -->
+  </tbody>
+</table>
+
+<br>
+
+<h2>Добавить студента</h2>
+
+<form id="studentForm">
+  <label for="lastName">Фамилия:</label><br>
+  <input type="text" id="lastName" name="lastName"><br>
+  <label for="firstName">Имя:</label><br>
+  <input type="text" id="firstName" name="firstName"><br>
+  <label for="middleName">Отчество:</label><br>
+  <input type="text" id="middleName" name="middleName"><br>
+  <label for="course">Курс:</label><br>
+  <input type="number" id="course" name="course"><br>
+  <label for="group">Группа:</label><br>
+  <input type="text" id="group" name="group"><br><br>
+  <input type="submit" value="Добавить">
+</form>
+
+<script>
+class Student {
+  constructor(lastName, firstName, middleName, course, group) {
+    this.lastName = lastName;
+    this.firstName = firstName;
+    this.middleName = middleName;
+    this.course = course;
+    this.group = group;
+  }
+
+  addToTable() {
+    let tableBody = document.getElementById("studentsTableBody");
+    let newRow = tableBody.insertRow();
+
+    let cellLastName = newRow.insertCell(0);
+    cellLastName.innerHTML = this.lastName;
+
+    let cellFirstName = newRow.insertCell(1);
+    cellFirstName.innerHTML = this.firstName;
+
+    let cellMiddleName = newRow.insertCell(2);
+    cellMiddleName.innerHTML = this.middleName;
+
+    let cellCourse = newRow.insertCell(3);
+    cellCourse.innerHTML = this.course;
+
+    let cellGroup = newRow.insertCell(4);
+    cellGroup.innerHTML = this.group;
+  }
+}
+
+document.getElementById("studentForm").addEventListener("submit", function(event) {
+  event.preventDefault();
+
+  let lastName = document.getElementById("lastName").value;
+  let firstName = document.getElementById("firstName").value;
+  let middleName = document.getElementById("middleName").value;
+  let course = document.getElementById("course").value;
+  let group = document.getElementById("group").value;
+
+  let newStudent = new Student(lastName, firstName, middleName, course, group);
+  newStudent.addToTable();
+
+  // Очищаем поля формы после добавления студента
+  document.getElementById("studentForm").reset();
+});
+</script>
+
+</body>
+</html>

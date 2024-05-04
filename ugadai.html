@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Игра "Угадай животное"</title>
+<style>
+    img {
+        width: 300px;
+        height: 200px;
+        cursor: pointer;
+        margin: 20px;
+    }
+
+    body {
+        margin: 140px;
+        text-align: center;
+        font-size: 27px;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    h1 {
+        text-align: center;
+    }
+</style>
+</head>
+<body>
+
+<h1>Игра "Угадай животное"</h1>
+<p>Выберите правильное животное: <span id="targetAnimal"></span></p>
+<div id="images">
+    <img src="/images/koshkaigra.jpg" alt="Кошка" onclick="checkAnimal('Кошка')">
+    <img src="/images/sobakaigra.jpeg" alt="Собака" onclick="checkAnimal('Собака')">
+    <img src="/images/ezhigra.jpeg" alt="Еж" onclick="checkAnimal('Еж')">
+</div>
+<p>Очки: <span id="score">0</span></p>
+
+<script>
+    var score = 0;
+    var animals = ['Кошка', 'Собака', 'Еж'];
+
+    function shuffle(array) {
+        for (var i = array.length - 1; i > 0; i--) {
+            var j = Math.floor(Math.random() * (i + 1));
+            var temp = array[i];
+            array[i] = array[j];
+            array[j] = temp;
+        }
+        return array;
+    }
+
+    function displayNextAnimal() {
+        var targetAnimal = document.getElementById('targetAnimal');
+        targetAnimal.innerText = animals[Math.floor(Math.random() * animals.length)];
+    }
+
+    function checkAnimal(animal) {
+        var targetAnimal = document.getElementById('targetAnimal').innerText;
+        if (animal === targetAnimal) {
+            score += 1;
+            document.getElementById('score').innerText = score;
+            displayNextAnimal();
+        } else {
+            score -= 3;
+            document.getElementById('score').innerText = score;
+        }
+        checkScore();
+    }
+
+    function checkScore() {
+        if (score < 0) {
+            alert('Игра окончена! Ваш счет: ' + score);
+            location.reload();
+        }
+        if (score == 15) {
+            alert('Игра окончена! Вы победили');
+            location.reload();
+        }
+    }
+
+    // Начинаем игру с первым животным
+    displayNextAnimal();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Multiple Choice Quiz</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color:aqua;
+  }
+
+  .question {
+    margin-bottom: 20px;
+    margin: 50px;
+  }
+
+  #result {
+    font-weight: bold;
+    margin-top: 20px;
+  }
+
+  h1 {
+    margin-top: 140px;
+    margin-bottom: 50px;
+  }
+
+  h1, .question, #result {
+    color:black;
+  }
+
+  button {
+    background-color: orange;
+  }
+</style>
+</head>
+<body>
+    <h1>Тест на общие знания</h1>
+<div class="question">
+  <p>1. Какой овощ очень полезен для зрения?</p>
+  <input type="radio" id="q1a" name="q1" value="carrot">
+  <label for="q1a">a) Морковь</label>
+  <input type="radio" id="q1b" name="q1" value="cabbage">
+  <label for="q1b">b) Капуста</label>
+  <input type="radio" id="q1c" name="q1" value="tomato">
+  <label for="q1c">c) Помидор</label>
+</div>
+
+<div class="question">
+  <p>2. Сколько хромосом у здорового человека?</p>
+  <input type="radio" id="q2a" name="q2" value="4">
+  <label for="q2a">a) 4</label>
+  <input type="radio" id="q2b" name="q2" value="46">
+  <label for="q2b">b) 46</label>
+  <input type="radio" id="q2c" name="q2" value="23">
+  <label for="q2c">c) 23</label>
+</div>
+
+<div class="question">
+  <p>3. Какая планета находится ближе всего к Солнцу?</p>
+  <input type="radio" id="q3a" name="q3" value="mars">
+  <label for="q3a">a) Марс</label>
+  <input type="radio" id="q3b" name="q3" value="merkuriy">
+  <label for="q3b">b) Меркурий</label>
+  <input type="radio" id="q3c" name="q3" value="yupiter">
+  <label for="q3c">c) Юпитер</label>
+</div>
+
+<button onclick="checkAnswers()">Проверка</button>
+
+<div id="result"></div>
+
+<script>
+  function checkAnswers() {
+    const answers = {
+      q1: document.querySelector('input[name="q1"]:checked').value,
+      q2: document.querySelector('input[name="q2"]:checked').value,
+      q3: document.querySelector('input[name="q3"]:checked').value
+    };
+
+    const correctAnswers = {
+      q1: 'carrot',
+      q2: '46',
+      q3: 'merkuriy'
+    };
+
+    let correctCount = 0;
+
+    for (const question in answers) {
+      if (answers.hasOwnProperty(question)) {
+        if (answers[question] === correctAnswers[question]) {
+          correctCount++;
+        }
+      }
+    }
+
+    document.getElementById('result').innerText = `Вы ответили на ${correctCount} из 3 вопросов правильно.`;
+  }
+</script>
+</body>
+</html>
